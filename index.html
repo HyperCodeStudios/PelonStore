@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PelonStore - Tienda de Pelón Roblox</title>
+    <style>
+        :root {
+            --primary: #ff2e7a;
+            --secondary: #4e11ff;
+            --accent: #00e1ff;
+            --background: #1a0030;
+            --text: #ffffff;
+            --card-bg: #2c0050;
+            --hover: #ff9500;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient-slide {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-left: 10px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('/api/placeholder/1400/500') center/cover;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 46, 122, 0.8), rgba(78, 17, 255, 0.8));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 20px rgba(0, 225, 255, 0.5);
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 46, 122, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 46, 122, 0.6);
+            background: linear-gradient(to right, var(--hover), var(--primary));
+        }
+        
+        .packages {
+            padding: 80px 5%;
+        }
+        
+        .packages h2 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 50px;
+            color: var(--accent);
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .package-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--accent);
+        }
+        
+        .package-header {
+            padding: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            text-align: center;
+        }
+        
+        .package-header h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .package-header .robux {
+            font-size: 42px;
+            font-weight: bold;
+        }
+        
+        .package-img {
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .package-img img {
+            max-height: 100%;
+            filter: drop-shadow(0 0 10px var(--accent));
+        }
+        
+        .package-details {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .package-price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .package-price .original {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        
+        .multi-currency {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .currency {
+            font-size: 16px;
+            color: #fff;
+        }
+        
+        .currency-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-right: 5px;
+        }
+        
+        .currency .original {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        
+        .buy-button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .buy-button:hover {
+            background: linear-gradient(to right, var(--hover), var(--primary));
+            transform: scale(1.05);
+        }
+        
+        .features {
+            padding: 20px 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+        
+        .feature {
+            margin: 8px 0;
+        }
+        
+        .feature i {
+            color: var(--accent);
+            margin-right: 5px;
+        }
+        
+        .featured {
+            position: relative;
+            transform: scale(1.05);
+        }
+        
+        .featured::before {
+            content: 'MEJOR OFERTA';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--hover);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 40px 5%;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .package-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.jpeg" alt="Logo RobuxPower">
+            <a href="index.html"><h1>Pelón Store</h1></a>
+        </div>
+        
+        <div class="nav-links">
+            <a href='contacto.html'>Contacto</a>
+            <a href='preguntas.html'>Preguntas Frecuentes</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Consigue Robux más baratos que nunca con entrega por Discord y servicio al cliente excepcional, ¡las mejores ofertas te esperan!</h2>
+        </div>
+    </section>
+    
+    <section class="packages">
+        <h2>ELIGE TU PAQUETE DE ROBUX</h2>
+        
+        <div class="package-grid">
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>PAQUETE BÁSICO</h3>
+                    <div class="robux">500 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="500.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$5.99</span>
+                        $4.00
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$4.00</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$5,500</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte 24/7</div>
+                        <div class="feature"><i>✓</i> Seguro y confiable</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+            
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>PAQUETE ESTÁNDAR</h3>
+                    <div class="robux">1000 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="1000.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$12.99</span>
+                        $8.00
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$8.00</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$11,000</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte 24/7</div>
+                        <div class="feature"><i>✓</i> 5% extra de bonificación</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+            
+            <div class="package-card featured">
+                <div class="package-header">
+                    <h3>PAQUETE PREMIUM</h3>
+                    <div class="robux">2000 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="2000.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$24.99</span>
+                        $16.00
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$16.00</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$22,000</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte 24/7</div>
+                        <div class="feature"><i>✓</i> 10% extra de bonificación</div>
+                        <div class="feature"><i>✓</i> Acceso a ofertas exclusivas</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+            
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>PAQUETE PRO</h3>
+                    <div class="robux">5250 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="5000.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$59.99</span>
+                        $44.99
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$44.99</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$56,999</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte prioritario</div>
+                        <div class="feature"><i>✓</i> 15% extra de bonificación</div>
+                        <div class="feature"><i>✓</i> Asistencia personalizada</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+            
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>PAQUETE ULTRA</h3>
+                    <div class="robux">11000 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="11000.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$119.99</span>
+                        $92.00
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$92.00</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$110,999</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte VIP</div>
+                        <div class="feature"><i>✓</i> 20% extra de bonificación</div>
+                        <div class="feature"><i>✓</i> Regalo sorpresa</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+            
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>PAQUETE LEGENDARIO</h3>
+                    <div class="robux">24000 ROBUX</div>
+                </div>
+                <div class="package-img">
+                    <img src="24000.jpeg" alt="Robux">
+                </div>
+                <div class="package-details">
+                    <div class="package-price">
+                        <span class="original">$239.99</span>
+                        $192.00
+                    </div>
+                    <div class="multi-currency">
+                        <div class="currency"><span class="currency-label">USD:</span>$192.00</div>
+                        <div class="currency"><span class="currency-label">ARS:</span>$223,999</div>
+                    </div>
+                    <div class="features">
+                        <div class="feature"><i>✓</i> Entrega por Discord</div>
+                        <div class="feature"><i>✓</i> Soporte Premium</div>
+                        <div class="feature"><i>✓</i> 25% extra de bonificación</div>
+                        <div class="feature"><i>✓</i> Acceso a eventos exclusivos</div>
+                        <div class="feature"><i>✓</i> Membresía VIP</div>
+                    </div>
+                    <button class="buy-button">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>RobuxPower</h3>
+                <p>La tienda de Robux más confiable y económica. Potencia tus juegos con nuestros paquetes.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces rápidos</h3>
+                <a href="#">Inicio</a>
+                <a href="#">Paquetes</a>
+                <a href="#">Testimonios</a>
+                <a href="#">Contacto</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Ayuda</h3>
+                <a href="#">Preguntas frecuentes</a>
+                <a href="#">Cómo comprar</a>
+                <a href="#">Políticas de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>Email: info@robuxpower.com</p>
+                <p>Soporte: soporte@robuxpower.com</p>
+                <p>Redes sociales: @PelónRoblox</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Pelón Store. Todos los derechos reservados. Este sitio no está afiliado con Roblox Corporation.</p>
+        </div>
+    </footer>
+</body>
+</html>
