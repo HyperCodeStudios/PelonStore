@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por tu compra - Pelón Store</title>
+    <style>
+        :root {
+            --primary: #ff2e7a;
+            --secondary: #4e11ff;
+            --accent: #00e1ff;
+            --background: #1a0030;
+            --text: #ffffff;
+            --card-bg: #2c0050;
+            --hover: #ff9500;
+            --success: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .checkmark {
+            font-size: 100px;
+            color: var(--success);
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px var(--success);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .discord-button {
+            background: linear-gradient(to right, #5865f2, #404eed);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .discord-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="checkmark">✔</div>
+    <h1>¡Gracias por tu compra!</h1>
+    <p>Únete a nuestro servidor de Discord para recibir tus Robux.</p>
+    <a href="https://discord.gg/TU-LINK-AQUI" class="discord-button" target="_blank">Unirse al Discord</a>
+</body>
+</html>
