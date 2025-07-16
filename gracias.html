@@ -53,7 +53,8 @@
         p {
             font-size: 20px;
             margin-bottom: 40px;
-            max-width: 600px;
+            max-width: 700px;
+            line-height: 1.6;
         }
 
         .discord-button {
@@ -75,12 +76,63 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(88, 101, 242, 0.6);
         }
+
+        .steps {
+            text-align: left;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .steps p {
+            margin-bottom: 20px;
+        }
+
+        .steps span {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .important-text {
+            font-weight: bold;
+            text-align: center;
+            font-size: 25px;
+            color: var(--hover);
+            background-color: var(--card-bg);
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 149, 0, 0.3);
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
     <div class="checkmark">✔</div>
     <h1>¡Gracias por tu compra!</h1>
-    <p>Por favor, únete a nuestro servidor de Discord, crea un ticket y envía capturas de pantalla de tu pago. Sigue las instrucciones del equipo para recibir tu pedido.</p>
+
+    <div class="important-text">
+        ⚠️ ¡Importante!<br>
+        No podremos procesar tu pedido si no completás estos pasos.<br>
+        ¡Estamos para ayudarte en lo que necesites!
+    </div>
+
+    <div class="steps">
+        <p>🎁 Para poder entregar tu producto, seguí estos pasos simples:</p>
+        
+        <p>👉 <span>Unite a nuestro servidor de Discord.</span></p>
+        
+        <p>🎫 <span>Creá un ticket</span> en el canal de pedidos.</p>
+        
+        <p>📸 <span>Enviá las capturas de pantalla</span> del pago realizado.</p>
+        
+        <p>📦 <span>Seguí las instrucciones</span> del staff para recibir tu pedido sin demoras.</p>
+    </div>
+
     <a href="https://discord.gg/3ghMQUxqAb" class="discord-button" target="_blank">Unirse al Discord</a>
 </body>
 </html>
